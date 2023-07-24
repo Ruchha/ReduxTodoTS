@@ -6,7 +6,7 @@ import { todoAdded } from '../store/reducers/todosSlice'
 export default function TodosForm() {
     const dispatch = useAppDispatch()
     const [todo, setTodo] = useState<ITodo>({
-        id:null,
+        id:null, //put null here since it doesn't have id before creation, and now its id: number | null in interface, probably there should be better approach
         name:"",
         body:"",
         isCompleted:false
@@ -14,8 +14,8 @@ export default function TodosForm() {
 
     function handleSubmit(e:React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault()
-        dispatch(todoAdded({...todo, id: Date.now()}))
-        setTodo({...todo, name:"", body:""})
+        dispatch(todoAdded({...todo, id: Date.now()})) // todo creation, adding random id
+        setTodo({...todo, name:"", body:""}) //fields clearing after button press
     }
   return (
     <form>

@@ -23,7 +23,7 @@ export default function TodosItem({todo, index}:Props) {
         <h2>{todo.name}</h2>
         <h2>{todo.body}</h2>
         <h2>{String(todo.isCompleted)}</h2>
-        <button onClick={() => dispatch(todoRemoved(todo.id!))}>delete</button>
+        <button onClick={() => dispatch(todoRemoved(todo.id!))}>delete</button> {/*todo deletion*/}
     </Todo>
   )
 }
