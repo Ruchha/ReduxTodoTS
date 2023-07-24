@@ -27,11 +27,18 @@ export const todosSlice = createSlice({
             if (matchingTodo){
                 matchingTodo.isCompleted = !matchingTodo.isCompleted
             }
+        },
+        todoEdited(state, action: PayloadAction<ITodo>){
+            let matchingTodo = state.todos.find(todo => todo.id === action.payload.id)
+            console.log(action.payload)
+            if (matchingTodo){
+                [matchingTodo.body, matchingTodo.name] = [action.payload.body, action.payload.name]
+            }
         }
         
     }
 })
 
-export const {todoAdded, todoRemoved, todoToggled} = todosSlice.actions
+export const {todoAdded, todoRemoved, todoToggled, todoEdited} = todosSlice.actions
 
 export default todosSlice.reducer

@@ -15,7 +15,6 @@ gap:20px;
 export default function TodosList() {
     const [filter, setFilter] = useState<IFilter>({sort:"", query:"", showCompleted: true, showIncompleted:true})
     const sortedAndSearchedTodos = useAppSelector(state => selectSortedAndSearchedTodos(state, filter))
-    console.log(filter)
     return (
       <Todos>
         <TodosFilter filter={filter} setFilter={setFilter}/>
