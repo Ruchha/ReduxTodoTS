@@ -3,4 +3,5 @@ export default interface ITodo {
     name: string;
     body: string;
     isCompleted: boolean;
+    [key: string]: any;
 }

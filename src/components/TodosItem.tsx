@@ -16,6 +16,7 @@ const Todo = styled.div`
 `
 export default function TodosItem({todo, index}:Props) {
     const dispatch = useAppDispatch()
+
   return (
     <Todo>
         <h2>{index + 1}</h2>

@@ -1,7 +1,8 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
 import ITodo from "../../model/ITodo";
+import { RootState } from "..";
 
-interface TodoState {
+export interface TodoState {
     todos:ITodo[]
 }
 
@@ -20,7 +21,6 @@ export const todosSlice = createSlice({
         todoRemoved(state, action: PayloadAction<number>)
         {
             state.todos = state.todos.filter(todo => action.payload !== todo.id)
-            
         },
         todoToggled(state, action: PayloadAction<number>){
             const matchingTodo = state.todos.find(todo => todo.id === action.payload)
@@ -31,6 +31,7 @@ export const todosSlice = createSlice({
         
     }
 })
+
 export const {todoAdded, todoRemoved, todoToggled} = todosSlice.actions
 
 export default todosSlice.reducer

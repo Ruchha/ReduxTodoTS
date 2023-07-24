@@ -15,6 +15,7 @@ export default function TodosForm() {
     function handleSubmit(e:React.MouseEvent<HTMLButtonElement, MouseEvent>){
         e.preventDefault()
         dispatch(todoAdded({...todo, id: Date.now()}))
+        setTodo({...todo, name:"", body:""})
     }
   return (
     <form>

@@ -2,25 +2,31 @@ import { useMemo, useState } from 'react'
 import {useAppSelector } from '../hooks/redux'
 import TodosItem from './TodosItem'
 import {styled} from 'styled-components'
-const Todos = styled.div`
+import { selectSortedAndSearchedTodos } from '../store/selectors'
 
+const Todos = styled.div`
 display:flex;
 flex-direction: column;
 gap:20px;
-
 `
 
 export default function TodosList() {
-    const [query, setQuery] = useState("")
-    const {todos} = useAppSelector(state => state.todos)
-    const searchedTodos = useMemo(() => query ? todos.filter(todo => todo.body.includes(query)) : todos, [query, todos])
-  return (
+    const [filter, setFilter] = useState({sort:"", query:""})
+    const filteredTodos = useAppSelector(state => selectSortedAndSearchedTodos(state, filter))
+    return (
     
-    <Todos>
-        <input onChange={e => setQuery(e.target.value)} value={query} placeholder="search..."/>
-        {searchedTodos.map((todo, index) => 
-            <TodosItem key={todo.id} index={index} todo={todo}/>
-            )}
-    </Todos>
+      <Todos>
+        <select value={filter.sort} onChange={e => setFilter({...filter, sort: e.target.value })}>
+          <option disabled value="">Сортировать по</option>
+          <option value="name">По названию</option>
+          <option value="body">По телу</option>
+          <option value="">Не сортировать</option>
+
+        </select>
+          <input onChange={e => setFilter({...filter, query:e.target.value})} value={filter.query} placeholder="search..."/>
+          {filteredTodos.map((todo, index) => 
+              <TodosItem key={todo.id} index={index} todo={todo}/>
+              )}
+      </Todos>
   )
 }
